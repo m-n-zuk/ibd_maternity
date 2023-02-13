@@ -1,0 +1,26 @@
+{% extends "__layout__.html" %}
+{% block title %} Dodaj terminy {% endblock %}
+
+
+{% block head %}
+<h2> DODAJ WOLNE TERMINY:</h2>
+{% endblock %}
+
+
+{% block content %}
+
+<form method="POST">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Dodaj">
+</form>
+
+<br>
+
+{% if messages %}
+<p class="accent"> {% for message in messages %} {{ message }} {% endfor %} </p>
+{% endif %}
+
+
+<p class="accent"> {{ msg }} </p>
+
+{% endblock %}
