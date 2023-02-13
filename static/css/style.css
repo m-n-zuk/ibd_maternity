@@ -1,0 +1,193 @@
+html {
+    background-color: rgba(201, 191, 187, 0.78);
+    color: rgba(56, 7, 34, 0.78);
+    margin: 0;
+    padding: 0;
+    font-family: 'Century Gothic';
+}
+
+body {
+    margin: 0 auto;
+    padding: 0;
+    display: block;
+    width: 1004px;
+    overflow: auto;
+    font-family: 'Century Gothic';
+}
+
+/*------------------------------*/
+/*----------- HEADER -----------*/
+/*------------------------------*/
+
+#header {
+    margin-top: 10px;
+    width: 100%;
+    float: left;
+    background-color: #ffffff;
+    border-radius: 12px;
+}
+
+/*------------------------------*/
+/*------------ MENU ------------*/
+/*------------------------------*/
+
+#nav {
+    padding-top: 20px;
+    width: 25%;
+    height: 100%;
+    float: left;
+    overflow: hidden;
+    background-color: #ffffff;
+    text-align: center;
+    line-height: 150%;
+    border-radius: 12px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+
+}
+
+/*------------------------------*/
+/*----------- CONTENT ----------*/
+/*------------------------------*/
+
+#content {
+    padding: 2%;
+    width: 69%;
+    height: 100%;
+    float: left;
+    overflow: hidden;
+    background-color: #fff;
+    text-align: center;
+    border-radius: 12px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 2%;
+
+}
+
+.description{
+    color: rgb(255, 255, 255);
+    background: url("/static/images/roses.webp");
+    padding: 3%;
+    border-radius: 12px;
+    border: 2px solid rgba(159, 17, 81, 0.78);
+    font-weight: bolder;
+    text-shadow: black 0.1em 0.1em 0.2em;
+
+
+}
+
+.article{
+    color: rgba(56, 7, 34, 0.78);
+    padding: 3%;
+    border-radius: 12px;
+    border: 2px solid rgba(159, 17, 81, 0.78);
+}
+
+.user{
+    width: 42%;
+    color: rgba(56, 7, 34, 0.78);
+    padding: 0% 2% 2% 2%;
+    margin: 1%;
+    border-radius: 12px;
+    border: 2px solid rgba(159, 17, 81, 0.78);
+    text-align: left;
+    list-style-type: none;
+    display: inline-block;
+}
+
+.article-txt {
+    text-align: justify;
+}
+
+.small-txt {
+    font-size: small;
+}
+
+.title{
+    color: rgba(159, 17, 81, 0.78);
+    font-size: large;
+    text-align: left;
+}
+
+.date{
+    color: rgba(129, 110, 119, 0.78);
+    font-size: 10px;
+    text-align: right;
+}
+.author{
+    color: rgba(129, 110, 119, 0.78);
+    font-size: smaller;
+    text-align: right;
+}
+/*------------------------------*/
+/*----------- FOOTER -----------*/
+/*------------------------------*/
+
+#footer {
+    clear: both;
+    width: 96%;
+    background-color: rgba(115, 12, 59, 0.78);
+    border-radius: 12px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    padding: 2%;
+    text-align: right;
+    font-size: 10px;
+    color: antiquewhite;
+
+}
+
+/*------------------------------*/
+/*----------- BUTTON -----------*/
+/*------------------------------*/
+
+.btn {
+    width: 70%;
+    border-radius: 20px;
+    transition-duration: 0.4s;
+    background-color: rgba(159, 17, 81, 0.78);
+    color: rgb(255, 255, 255);
+    border: 2px solid rgba(159, 17, 81, 0.78);
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration-line: none;
+    display: inline-block;
+    height: 25px;
+}
+.btn:hover {
+    background-color: rgba(201, 191, 187, 0.78);
+    color: white;
+    font-weight: 1000;
+}
+
+.small-btn {
+    width: auto;
+    border-radius: 15px;
+    transition-duration: 0.4s;
+    background-color: rgba(159, 17, 81, 0.78);
+    color: rgb(255, 255, 255);
+    border: 2px solid rgba(159, 17, 81, 0.78);
+    padding: 5px 10px 5px 10px;
+    text-align: center;
+    text-decoration-line: none;
+    display: inline-block;
+    height: 20px;
+    font-size: smaller;
+}
+.small-btn:hover {
+    background-color: rgba(201, 191, 187, 0.78);
+    color: white;
+    font-weight: 1000;
+}
+
+/*------------------------------*/
+/*----------- IMAGES -----------*/
+/*------------------------------*/
+
+img {
+    max-width: 90%;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}

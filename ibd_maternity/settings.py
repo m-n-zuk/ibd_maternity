@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -108,7 +108,27 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    'static/'
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# DATABASE from local_settings.py
+
+try:
+    from ibd_maternity.local_settings import DATABASES
+except ModuleNotFoundError:
+    print("Brak konfiguracji bazy danych w pliku local_settings.py!")
+    print("Uzupełnij dane i spróbuj ponownie!")
+    exit(0)
+
+
+# Add or change a related_name argument to the definition
+# for 'ibd_website.User.user_permissions' or 'auth.User.
+
+AUTH_USER_MODEL = "ibd_website.User"

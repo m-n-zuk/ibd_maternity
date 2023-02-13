@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta charset="UTF-8">
+    <title> {% block title %} {% endblock %} </title>
+</head>
+<body>
+
+<div id="header">
+    <a href="/"><img src="/static/images/logo.jpg" alt="logo"></a>
+</div>
+
+<div id="nav">
+
+    <p>
+        {% if user.is_authenticated%}
+        ZALOGOWANO:<br>
+        {{user.username}}
+        {% else %}
+        Użytkownik niezalogowany:
+        {% endif %}
+    </p>
+
+    {% if user.is_authenticated %}
+
+    <a class="btn" href="/logout/"> wyloguj</a> <br><br>
+
+    {% else %}
+
+    <a class="btn" href="/register/"> zarejestruj</a> <br><br>
+    <a class="btn" href="/login/"> zaloguj</a> <br><br>
+
+    {% endif %}
+
+
+      <p> &#9825; &#9825; &#9825; </p> <br>
+    <a class="btn" href="/user/"> panel użytkownika</a> <br><br>
+    <a class="btn" href="/community/"> społeczność </a> <br><br>
+    <a class="btn" href="/doctors/"> lekarze </a> <br><br>
+    <a class="btn" href="/articles/"> artykuły </a> <br><br><br>
+</div>
+
+<div id="content">
+    {% block head %} {% endblock %}
+
+    <div> {% block content %} {% endblock %} </div>
+
+</div>
+
+<div id="footer">
+    autorka strony: Magdalena Żuk | &#9825; | kontakt: magdalena.n.zuk@gmail.com
+</div>
+
+</body>
+</html>
