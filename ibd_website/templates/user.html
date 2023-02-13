@@ -1,0 +1,18 @@
+{% extends "__layout__.html" %}
+
+{% block title %} Panel użytkownika {% endblock %}
+
+
+{% block head %}
+<h2> Witaj {{ user.username }}!</h2>
+{% endblock %}
+
+
+{% block content %}
+
+<a class="btn" href="/messages/{{user.id}}/"> wiadomości </a> <br><br>
+<a class="btn" href="/visits/{{user.id}}"> wizyty lekarskie </a> <br><br>
+<a class="btn" href="/edit/{{user.id}}"> edytuj profil </a> <br><br>
+<a class="btn" href="/illness/{{user.id}}"> opisz schorzenie </a> <br><br>
+
+{% endblock %}

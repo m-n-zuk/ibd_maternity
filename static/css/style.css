@@ -54,7 +54,7 @@ body {
     color: rgba(159, 17, 81, 0.78);
     font-size: small;
     font-weight: bolder;
-    text-align: left;
+    text-align: center;
 }
 
 #content {
@@ -80,8 +80,6 @@ body {
     border: 2px solid rgba(159, 17, 81, 0.78);
     font-weight: bolder;
     text-shadow: black 0.1em 0.1em 0.2em;
-
-
 }
 
 .article{

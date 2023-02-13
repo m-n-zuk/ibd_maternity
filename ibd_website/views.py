@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
@@ -129,3 +130,28 @@ class LogoutView(View):
     def get(self, request):
         logout(request)
         return redirect(f"/")
+
+
+class UserView(LoginRequiredMixin, View):
+
+    def get(self, request):
+        return render(request, 'user.html')
+
+
+class CommunityView(View):
+
+    def get(self, request):
+
+        users = User.objects.filter(patient__isnull=False, patient__visible=True)
+
+        return render(request, 'community.html', {'users': users})
+
+
+class DoctorsView(View):
+
+    def get(self, request):
+
+        users = User.objects.filter(doctor__isnull=False)
+
+        return render(request, 'doctors.html', {'users': users})
+
