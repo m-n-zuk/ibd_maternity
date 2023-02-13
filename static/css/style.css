@@ -50,6 +50,13 @@ body {
 /*----------- CONTENT ----------*/
 /*------------------------------*/
 
+.accent {
+    color: rgba(159, 17, 81, 0.78);
+    font-size: small;
+    font-weight: bolder;
+    text-align: left;
+}
+
 #content {
     padding: 2%;
     width: 69%;

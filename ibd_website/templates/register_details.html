@@ -1,0 +1,16 @@
+{% extends "__layout__.html" %}
+
+{% block title %} Dokończ rejestrację {% endblock %}
+
+
+{% block head %}
+<h2> Dokończ rejestrację jako {{ role.display }}:</h2>
+{% endblock %}
+
+
+{% block content %}
+<form method="POST">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Zapisz">
+</form>
+{% endblock %}

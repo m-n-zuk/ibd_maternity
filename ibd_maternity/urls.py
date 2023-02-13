@@ -21,4 +21,9 @@ from ibd_visits import views as vv
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', wv.MainView.as_view()),
+    path('register/', wv.RegisterView.as_view()),
+    path('register_details/<str:role>/<int:id>/', wv.RegisterDetailsView.as_view()),
+    path('login/', wv.LoginView.as_view()),
+    path('logout/', wv.LogoutView.as_view()),
+
 ]
