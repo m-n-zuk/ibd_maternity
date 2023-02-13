@@ -1,0 +1,35 @@
+{% extends "__layout__.html" %}
+
+{% block title %} Społeczność {% endblock %}
+
+
+{% block head %}
+<h2> Profile użytkowniczek:</h2>
+{% endblock %}
+
+
+{% block content %}
+
+{% for u in users %}
+
+<div class="user">
+    <h2> {{u.first_name}} </h2>
+    <ul>
+        <li> data dołączenia: {{ u.date_joined | date:"d.m.Y"}}</li>
+        <li> data urodzenia: {{u.patient.date_of_birth | date:"d.m.Y"}}</li>
+        <li> czy mam już dzieci: {% if u.patient.children %} Tak {% else %} Nie {% endif %}</li>
+        <li> czy mam stomie: {% if u.patient.stoma %} Tak {% else %} Nie {% endif %}</li>
+    </ul>
+
+    <p class="small-txt"> {{ u.patient.medical_history }} </p>
+
+    {% if user.is_authenticated %}
+    <a class="btn small-btn" href="/message/"> napisz wiadomość </a>
+    {% else %}
+    <a class="btn small-btn" href="/login/"> napisz wiadomość </a>
+    {% endif %}
+
+</div>
+{% endfor %}
+
+{% endblock %}

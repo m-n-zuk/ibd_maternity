@@ -35,7 +35,7 @@ class RegisterForm(forms.Form):
 class PatientForm(forms.Form):
 
     date_of_birth = forms.DateField(label="data urodzenia")
-    medical_history = forms.CharField(label="historia choroby", widget=forms.Textarea)
+    medical_history = forms.CharField(label="moja historia", widget=forms.Textarea)
     children = forms.ChoiceField(label="czy masz dzieci?",
                                  choices=((True, 'tak'), (False, 'nie')))
     stoma = forms.ChoiceField(label="czy masz stomie?",

@@ -1,0 +1,31 @@
+{% extends "__layout__.html" %}
+
+{% block title %} Lekarze {% endblock %}
+
+
+{% block head %}
+<h2> Profile lekarzy:</h2>
+{% endblock %}
+
+
+{% block content %}
+
+{% for u in users %}
+
+<div class="user">
+    <h2> {{u.first_name}} {{ u.last_name }}</h2>
+
+    <p> specjalizacja: {{ u.doctor.specialization}} </p>
+    <p> rezerwacja (tel): {{ u.phone_number}} </p>
+    <p class="small-txt"> {{ u.doctor.experience }} </p>
+
+    {% if user.is_authenticated %}
+    <a class="btn small-btn" href="/book_visit/{{u.id}}/{{user.id}}"> umów wizytę </a>
+    {% else %}
+    <a class="btn small-btn" href="/login"> umów wizytę </a>
+    {% endif %}
+
+</div>
+{% endfor %}
+
+{% endblock %}

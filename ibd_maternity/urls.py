@@ -25,5 +25,8 @@ urlpatterns = [
     path('register_details/<str:role>/<int:id>/', wv.RegisterDetailsView.as_view()),
     path('login/', wv.LoginView.as_view()),
     path('logout/', wv.LogoutView.as_view()),
+    path('user/', wv.UserView.as_view()),
+    path('community/', wv.CommunityView.as_view()),
+    path('doctors/', wv.DoctorsView.as_view()),
 
 ]
