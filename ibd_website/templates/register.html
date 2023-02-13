@@ -1,0 +1,18 @@
+{% extends "__layout__.html" %}
+
+{% block title %} Załóż konto {% endblock %}
+
+
+{% block head %}
+<h2> ZAŁÓŻ KONTO:</h2>
+{% endblock %}
+
+
+{% block content %}
+
+<form method="POST">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Zarejestruj">
+</form>
+
+{% endblock %}

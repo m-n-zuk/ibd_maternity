@@ -1,0 +1,23 @@
+{% extends "__layout__.html" %}
+
+{% block title %} Zaloguj {% endblock %}
+
+
+{% block head %}
+<h2> ZALOGUJ:</h2>
+{% endblock %}
+
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Zaloguj">
+</form>
+
+{% if messages %}
+<p class="accent"> {% for message in messages %} {{ message }} {% endfor %} </p>
+{% endif %}
+
+{% endblock %}
