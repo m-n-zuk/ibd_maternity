@@ -16,8 +16,9 @@
     <a class="btn" href="/edit/{{ user.id }}"> edytuj profil </a> <br><br>
     <a class="btn" href="/messages/{{ user.id }}/"> wiadomości </a>
     <br>
-    {% if user.is_superuser %}
-    <a class="btn" href="/add_visit/"> dodaj wolne wizyty lekarskie </a>
+    {% if user.is_superuser %}<br><br>
+        <p class="accent"> uprawnienia admina: </p>
+        <a class="btn" href="/add_visit/"> dodaj wolne terminy wizyt lekarskich </a>
     {% endif %}
 
 {% endblock %}

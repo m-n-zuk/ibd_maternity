@@ -12,37 +12,40 @@
     <a href="/"><img src="/static/images/logo.jpg" alt="logo"></a>
 </div>
 
-<div id="nav">
+<div class="container">
 
+    <div id="nav">
 
-    {% if user.is_authenticated %}
-        <p class="accent">
-        ZALOGOWANO: <br>
-        {{ user.username }}
-        </p>
+        {% if user.is_authenticated %}
+            <p class="accent">
+                ZALOGOWANO: <br>
+                {{ user.username }}
+            </p>
 
-    {% else %}
-        <p class="accent"> użytkownik niezalogowany: </p>
-    {% endif %}
+        {% else %}
+            <p class="accent"> użytkownik niezalogowany: </p>
+        {% endif %}
 
-    {% if user.is_authenticated %}
-        <a class="btn" href="/logout/"> wyloguj</a> <br><br>
-    {% else %}
-        <a class="btn" href="/login/"> zaloguj</a> <br><br>
-        <a class="btn" href="/register/"> zarejestruj</a> <br><br>
-    {% endif %}
+        {% if user.is_authenticated %}
+            <a class="btn" href="/logout/"> wyloguj</a> <br><br>
+        {% else %}
+            <a class="btn" href="/login/"> zaloguj</a> <br><br>
+            <a class="btn" href="/register/"> zarejestruj</a> <br><br>
+        {% endif %}
 
-    <p class="accent"> &#9825; &nbsp; &#9825; &nbsp; &#9825; </p> <br>
-    <a class="btn" href="/user/"> panel użytkownika</a> <br><br>
-    <a class="btn" href="/community/"> społeczność </a> <br><br>
-    <a class="btn" href="/doctors/"> lekarze </a> <br><br><br>
-    <a class="btn" href="/articles/"> artykuły </a> <br><br><br>
-</div>
+        <p class="accent"> &#9825; &nbsp; &#9825; &nbsp; &#9825; </p> <br>
+        <a class="btn" href="/user/"> panel użytkownika</a> <br><br>
+        <a class="btn" href="/community/"> społeczność </a> <br><br>
+        <a class="btn" href="/doctors/"> lekarze </a> <br><br><br>
+        <a class="btn" href="/articles/"> artykuły </a> <br><br><br>
+    </div>
 
-<div id="content">
-    {% block head %} {% endblock %}
+    <div id="content">
+        {% block head %} {% endblock %}
 
-    <div> {% block content %} {% endblock %} </div>
+        <div> {% block content %} {% endblock %} </div>
+
+    </div>
 
 </div>
 

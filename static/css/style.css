@@ -50,6 +50,11 @@ body {
 /*----------- CONTENT ----------*/
 /*------------------------------*/
 
+.container {
+    display: flex;
+    height: auto;
+}
+
 .accent {
     color: rgba(159, 17, 81, 0.78);
     font-size: small;

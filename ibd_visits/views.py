@@ -1,7 +1,7 @@
 import datetime
 
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import View
 
@@ -11,9 +11,14 @@ from ibd_website.models import *
 
 
 # # # PROSTY ROBOCZY WIDOK DO DODAWANIA LEKARZOM WOLNYCH TERMINÓW # # #
-class AddVisitView(View):
+class AddVisitView(PermissionRequiredMixin, View):
+
+    permission_required = 'add_doctorvisit'
+
     def get(self, request):
+
         form = AddVisitForm()
+
         return render(request, 'add_visit.html', {'form': form})
 
     def post(self, request):
