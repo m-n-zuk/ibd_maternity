@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
@@ -118,3 +120,22 @@ class BookVisitView2(LoginRequiredMixin, View):
         visit_term.save()
 
         return redirect(f"/visits/{id_pat}")
+
+
+class VisitsView(LoginRequiredMixin, View):
+
+    def get(self, request, id):
+
+        patient = User.objects.get(id=id)
+        med_visits = MedicalVisit.objects.filter(patient=patient)
+        future_visits = []
+        past_visits = []
+
+        for med_visit in med_visits:
+            med_visit.visit_term.visit_term.time = TIME[med_visit.visit_term.visit_term.time-1][1]
+            if med_visit.visit_term.visit_term.date >= datetime.date.today():
+                future_visits.append(med_visit)
+            else:
+                past_visits.append(med_visit)
+
+        return render(request, 'visits.html', {'med_visits': med_visits, 'past': past_visits, 'future': future_visits})

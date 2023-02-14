@@ -32,6 +32,6 @@ urlpatterns = [
     path('add_visit/', vv.AddVisitView.as_view()),
     # path('book_visit/<int:id_doc>/<int:id_pat>', vv.BookVisitView.as_view()),
     path('book_visit/<int:id_doc>/<int:id_pat>', vv.BookVisitView2.as_view()),
-    # path('visits/<int:id>', vv.VisitsView.as_view()),
+    path('visits/<int:id>', vv.VisitsView.as_view()),
 
 ]

@@ -15,8 +15,8 @@
 <div class="user">
     <h2> {{u.first_name}} {{ u.last_name }}</h2>
 
-    <p> specjalizacja: {{ u.doctor.specialization}} </p>
-    <p> rezerwacja (tel): {{ u.phone_number}} </p>
+    <h4 class="title"> {{ u.doctor.specialization}} </h4>
+    <p> rezerwacja: {{ u.phone_number }} </p>
     <p class="small-txt"> {{ u.doctor.experience }} </p>
 
     {% if user.is_authenticated %}

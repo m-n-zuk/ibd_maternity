@@ -113,10 +113,12 @@ STATICFILES_DIRS = [
     'static/'
 ]
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 # DATABASE from local_settings.py
 
@@ -128,7 +130,11 @@ except ModuleNotFoundError:
     exit(0)
 
 
-# Add or change a related_name argument to the definition
-# for 'ibd_website.User.user_permissions' or 'auth.User.
+# AUTH_USER_MODEL
 
 AUTH_USER_MODEL = "ibd_website.User"
+
+
+# Redirect for not-logged-in user
+
+LOGIN_URL = '/login/'

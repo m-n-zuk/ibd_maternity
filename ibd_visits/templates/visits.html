@@ -1,0 +1,40 @@
+{% extends "__layout__.html" %}
+{% block title %} Moje wizyty {% endblock %}
+
+
+{% block head %}
+    <h1> Moje wizyty</h1> <br>
+{% endblock %}
+
+
+
+{% block content %}
+
+    <p class="header-visits"> NADCHODZĄCE: </p> <br>
+
+    {% for med_visit in future %}
+
+        <div class="visits">
+            <h2> {{ med_visit.doctor.doctor.specialization }} </h2>
+            lekarz: {{ med_visit.doctor.first_name }} {{ med_visit.doctor.last_name }}
+            <h4> data: {{ med_visit.visit_term.visit_term.date | date:"d.m.Y" }}, godzina: {{ med_visit.visit_term.visit_term.time }} </h4>
+            <p class="small-right"> data rezerwacji: {{ med_visit.reservation_date | date:"d.m.Y, H:i:s" }} </p>
+        </div>
+        <br>
+    {% endfor %}
+
+    <p class="header-visits"> MINIONE: </p> <br>
+
+    {% for med_visit in past %}
+
+        <div class="visits">
+            <h2> {{ med_visit.doctor.doctor.specialization }} </h2>
+            lekarz: {{ med_visit.doctor.first_name }} {{ med_visit.doctor.last_name }}
+            <h4> {{ med_visit.visit_term.visit_term.date | date:"d.m.Y" }}, godzina: {{ med_visit.visit_term.visit_term.time }} </h4>
+            <p class="small-right"> data rezerwacji: {{ med_visit.reservation_date | date:"d.m.Y, H:i:s" }} </p>
+        </div>
+        <br>
+    {% endfor %}
+
+
+{% endblock %}

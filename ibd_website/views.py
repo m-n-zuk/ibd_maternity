@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -142,7 +144,15 @@ class CommunityView(View):
 
     def get(self, request):
 
+        def calculate_age(birth_date):
+            today = datetime.date.today()
+            age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
+            return age
+
         users = User.objects.filter(patient__isnull=False, patient__visible=True)
+
+        for user in users:
+            user.patient.date_of_birth = calculate_age(user.patient.date_of_birth)
 
         return render(request, 'community.html', {'users': users})
 
