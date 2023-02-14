@@ -1,0 +1,23 @@
+{% extends "__layout__.html" %}
+
+{% block title %} Rezerwacja wizyty {% endblock %}
+
+
+{% block head %}
+<h2> ZAREZERWUJ WIZYTĘ:</h2>
+{% endblock %}
+
+
+{% block content %}
+
+PACJENT: {{ patient.first_name }} {{ patient.last_name }}
+<br>
+LEKARZ: {{ doctor.first_name }} {{ doctor.last_name }}
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Zarezerwuj">
+</form>
+
+{% endblock %}

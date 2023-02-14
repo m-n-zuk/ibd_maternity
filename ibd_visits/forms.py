@@ -16,3 +16,7 @@ class AddVisitForm(forms.Form):
     date = forms.DateField(widget=forms.SelectDateWidget)
     time = forms.ChoiceField(choices=TIME)
 
+
+# class BookVisitForm(forms.Form):
+#
+#     term = forms.ChoiceField(choices=[])

@@ -1,0 +1,29 @@
+{% extends "__layout__.html" %}
+
+{% block title %} Rezerwacja wizyty {% endblock %}
+
+
+{% block head %}
+<h2> ZAREZERWUJ WIZYTĘ:</h2>
+{% endblock %}
+
+
+{% block content %}
+
+PACJENT: {{ patient.patient.first_name }} {{ patient.patient.last_name }}
+<br>
+LEKARZ: {{ doctor.doctor.first_name }} {{ doctor.doctor.last_name }}
+
+<form method="POST">
+    {% csrf_token %}
+    <select name="term">
+        {% for visit in doc_visits %}
+            <option value="{{ visit.id }}">
+                {{ visit.visit_term.date | date:"l d.m.Y"}}, time: {{ visit.visit_term.time }}
+            </option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Zarezerwuj">
+</form>
+
+{% endblock %}
