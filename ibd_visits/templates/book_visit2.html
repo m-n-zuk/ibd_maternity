@@ -10,9 +10,8 @@
 
 {% block content %}
 
-PACJENT: {{ patient.patient.first_name }} {{ patient.patient.last_name }}
-<br>
-LEKARZ: {{ doctor.doctor.first_name }} {{ doctor.doctor.last_name }}
+<p> PACJENT: {{ patient.patient.first_name }} {{ patient.patient.last_name }} </p>
+<p> LEKARZ: {{ doctor.doctor.first_name }} {{ doctor.doctor.last_name }} </p>
 
 <form method="POST">
     {% csrf_token %}

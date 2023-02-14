@@ -58,7 +58,7 @@ body {
 }
 
 #content {
-    padding: 2%;
+    padding: 2% 2% 4% 2%;
     width: 69%;
     height: 100%;
     float: left;

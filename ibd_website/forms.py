@@ -14,14 +14,14 @@ class RegisterForm(forms.Form):
     email = forms.EmailField(label="Adres email")
     role = forms.ChoiceField(label="Kim jestem?",
                              choices=(('patient', 'pacjentem'), ('doctor', 'lekarzem')),
-                             widget=forms.RadioSelect)
+                             widget=forms.RadioSelect(attrs={'class': 'form-check-inline'}))
 
     def clean(self):  # rozbudowujemy metode rodzica
         cleaned_data = super().clean()
         password = cleaned_data.get('password')
         password2 = cleaned_data.get('password2')
         if password != password2:
-            raise ValidationError("Podane hasla nie sa takie same!")
+            raise ValidationError("Podane hasła nie są takie same!")
             # wyswietla sie na samej gorze, jak zrobic zeby bylo nad password?
 
     def clean_login(self):
