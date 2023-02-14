@@ -4,15 +4,20 @@
 
 
 {% block head %}
-<h2> Witaj {{ user.username }}!</h2>
+    <h2> Witaj {{ user.first_name }}!</h2>
 {% endblock %}
 
 
 {% block content %}
 
-<a class="btn" href="/messages/{{user.id}}/"> wiadomości </a> <br><br>
-<a class="btn" href="/visits/{{user.id}}"> wizyty lekarskie </a> <br><br>
-<a class="btn" href="/edit/{{user.id}}"> edytuj profil </a> <br><br>
-<a class="btn" href="/illness/{{user.id}}"> opisz schorzenie </a> <br><br>
+    <a class="btn" href="/visits/{{ user.id }}"> wizyty lekarskie </a> <br><br>
+    <br>
+    <a class="btn" href="/illness/{{ user.id }}"> opisz schorzenie </a> <br><br>
+    <a class="btn" href="/edit/{{ user.id }}"> edytuj profil </a> <br><br>
+    <a class="btn" href="/messages/{{ user.id }}/"> wiadomości </a> <br><br>
+    <br>
+    {% if user.is_superuser %}
+    <a class="btn" href="/add_visit/"> dodaj wolne wizyty lekarskie </a> <br><br>
+    {% endif %}
 
 {% endblock %}

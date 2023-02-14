@@ -96,7 +96,7 @@ body {
     margin: 1%;
     border-radius: 12px;
     border: 2px solid rgba(159, 17, 81, 0.78);
-    text-align: left;
+    text-align: justify;
     list-style-type: none;
     display: inline-block;
 }
@@ -144,6 +144,10 @@ body {
     text-align: left;
     text-indent: 5%;
     letter-spacing: 5px;
+}
+
+#h1 {
+    line-height: 250%;
 }
 
 /*------------------------------*/

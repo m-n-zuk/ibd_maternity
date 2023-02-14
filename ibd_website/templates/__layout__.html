@@ -14,31 +14,29 @@
 
 <div id="nav">
 
-    <p>
-        {% if user.is_authenticated%}
-        ZALOGOWANO:<br>
-        {{user.username}}
-        {% else %}
-        Użytkownik niezalogowany:
-        {% endif %}
-    </p>
 
     {% if user.is_authenticated %}
-
-    <a class="btn" href="/logout/"> wyloguj</a> <br><br>
+        <p class="accent">
+        ZALOGOWANO: <br>
+        {{ user.username }}
+        </p>
 
     {% else %}
+        <p class="accent"> użytkownik niezalogowany: </p>
+    {% endif %}
 
-    <a class="btn" href="/register/"> zarejestruj</a> <br><br>
-    <a class="btn" href="/login/"> zaloguj</a> <br><br>
-
+    {% if user.is_authenticated %}
+        <a class="btn" href="/logout/"> wyloguj</a> <br><br>
+    {% else %}
+        <a class="btn" href="/login/"> zaloguj</a> <br><br>
+        <a class="btn" href="/register/"> zarejestruj</a> <br><br>
     {% endif %}
 
 
-      <p> &#9825; &#9825; &#9825; </p> <br>
+    <p> &#9825; &#9825; &#9825; </p> <br>
     <a class="btn" href="/user/"> panel użytkownika</a> <br><br>
     <a class="btn" href="/community/"> społeczność </a> <br><br>
-    <a class="btn" href="/doctors/"> lekarze </a> <br><br>
+    <a class="btn" href="/doctors/"> lekarze </a> <br><br><br>
     <a class="btn" href="/articles/"> artykuły </a> <br><br><br>
 </div>
 
@@ -50,7 +48,7 @@
 </div>
 
 <div id="footer">
-    autorka strony: Magdalena Żuk | &#9825; | kontakt: magdalena.n.zuk@gmail.com
+    autorka strony: Magdalena Żuk &nbsp; &#9825; &nbsp; kontakt: magdalena.n.zuk@gmail.com
 </div>
 
 </body>
