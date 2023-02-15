@@ -11,11 +11,13 @@ from ibd_website.forms import *
 from ibd_website.models import *
 
 
+# view of main paige - for everyone
 class MainView(View):
     def get(self, request):
         return render(request, 'main_page.html')
 
 
+# view of registration - for everyone
 class RegisterView(View):
     def get(self, request):
         form = RegisterForm()
@@ -28,7 +30,6 @@ class RegisterView(View):
         if form.is_valid():
             data = form.cleaned_data
 
-            # niebezpieczna operacja (C z CRUD)
             user = User.objects.create_user(
                 username=data.get('username'),
                 first_name=data.get('first_name'),
@@ -40,17 +41,19 @@ class RegisterView(View):
 
             return redirect(f"/register_details/{role}/{user.id}")
 
-        else:  # dodac po dodaniu walidacji
+        else:
             return render(request, 'register.html', {'form': form})
 
 
+# view of second part of registration (doctor&patient)
 class RegisterDetailsView(View):
-    def get(self, request, role, id):
+    def get(self, request, role, **kwargs):
 
         if role == 'patient':
             form = PatientForm()
         if role == 'doctor':
             form = DoctorForm()
+
         return render(request, 'register_details.html', {'form': form, 'role': role})
 
     def post(self, request, role, id):
@@ -64,7 +67,7 @@ class RegisterDetailsView(View):
 
                 user = User.objects.get(id=id)
 
-                patient_details = Patient.objects.create(
+                Patient.objects.create(
                     patient=user,
                     date_of_birth=data.get('date_of_birth'),
                     medical_history=data.get('medical_history'),
@@ -75,7 +78,7 @@ class RegisterDetailsView(View):
 
                 return redirect(f"/login/")
 
-            else:  # dodac po dodaniu walidacji
+            else:
                 return render(request, 'register_details.html', {'form': form, 'role': role})
 
         if role == 'doctor':
@@ -87,7 +90,7 @@ class RegisterDetailsView(View):
 
                 user = User.objects.get(id=id)
 
-                doctor_details = Doctor.objects.create(
+                Doctor.objects.create(
                     doctor=user,
                     experience=data.get('experience'),
                     specialization=data.get('specialization')
@@ -95,51 +98,52 @@ class RegisterDetailsView(View):
 
                 return redirect(f"/login/")
 
-            else:  # dodac po dodaniu walidacji
+            else:
                 return render(request, 'register_details.html', {'form': form, 'role': role})
 
 
+# view of log in
 class LoginView(View):
     def get(self, request):
         form = LoginForm()
         return render(request, 'login.html', {'form': form})
 
     def post(self, request):
+
         form = LoginForm(request.POST)
 
         if form.is_valid():
-            data = form.cleaned_data
 
+            data = form.cleaned_data
             username = data.get('username')
             password = data.get('password')
 
-            # uwierzytelnienie
             user = authenticate(username=username, password=password)
 
             if user:
-                # logowanie
                 login(request, user)
-
                 return redirect(f"/user")
 
             else:
                 messages.error(request, 'Błąd uwierzytelnienia. Podano nieprawidłowe poświadczenia.')
-
                 return render(request, 'login.html', {'form': form})
 
 
+# view of log out - redirect to main paige
 class LogoutView(View):
     def get(self, request):
         logout(request)
         return redirect(f"/")
 
 
+# view of user panel - only for logged-in user
 class UserView(LoginRequiredMixin, View):
 
     def get(self, request):
         return render(request, 'user.html')
 
 
+# view of community - for everyone
 class CommunityView(View):
 
     def get(self, request):
@@ -157,6 +161,7 @@ class CommunityView(View):
         return render(request, 'community.html', {'users': users})
 
 
+# view of doctors - for everyone
 class DoctorsView(View):
 
     def get(self, request):
@@ -164,4 +169,3 @@ class DoctorsView(View):
         users = User.objects.filter(doctor__isnull=False)
 
         return render(request, 'doctors.html', {'users': users})
-

@@ -25,11 +25,11 @@ urlpatterns = [
     path('register_details/<str:role>/<int:id>/', wv.RegisterDetailsView.as_view()),
     path('login/', wv.LoginView.as_view()),
     path('logout/', wv.LogoutView.as_view()),
-    path('user/', wv.UserView.as_view()),
+    path('user/', wv.UserView.as_view(), name='user'),
     path('community/', wv.CommunityView.as_view()),
     path('doctors/', wv.DoctorsView.as_view()),
 
-    path('add_visit/', vv.AddVisitView.as_view()),
+    path('add_visit/', vv.AddVisitView2.as_view()),
     # path('book_visit/<int:id_doc>/<int:id_pat>', vv.BookVisitView.as_view()),
     path('book_visit/<int:id_doc>/<int:id_pat>', vv.BookVisitView2.as_view()),
     path('visits/<int:id>', vv.VisitsView.as_view()),

@@ -10,44 +10,74 @@ from ibd_visits.models import *
 from ibd_website.models import *
 
 
-# # # PROSTY ROBOCZY WIDOK DO DODAWANIA LEKARZOM WOLNYCH TERMINÓW # # #
+# view for adding visits to doctors - only for admin
 class AddVisitView(PermissionRequiredMixin, View):
-
     permission_required = 'add_doctorvisit'
 
     def get(self, request):
 
-        form = AddVisitForm()
-
-        return render(request, 'add_visit.html', {'form': form})
+        doctors = User.objects.filter(doctor__isnull=False)
+        return render(request, 'add_visit.html', {'doctors': doctors, 'time': TIME})
 
     def post(self, request):
-        form = AddVisitForm(request.POST)
 
-        if form.is_valid():
+        doctor_id = request.POST['doctor']
+        visit_date = request.POST['date']
+        visit_time = request.POST['time']
 
-            data = form.cleaned_data
+        visit_term = VisitTerm.objects.create(date=visit_date, time=visit_time)
+        doctor = Doctor.objects.get(doctor_id=User.objects.get(id=doctor_id))
 
-            id_doc = data.get('doctor')
-            visit_date = data.get('date')
-            visit_time = data.get('time')
+        DoctorVisit.objects.create(doctor=doctor, visit_term=visit_term)
 
-            visit_term = VisitTerm.objects.create(date=visit_date, time=visit_time)
-            doctor = Doctor.objects.get(doctor_id=User.objects.get(id=id_doc))
+        messages.success(request, f"Pomyślnie dodano wizytę dnia {visit_date} "
+                                  f"o godz {TIME[int(visit_time) - 1][1]} "
+                                  f"lekarzowi: {doctor.doctor.first_name} {doctor.doctor.last_name}!")
 
-            DoctorVisit.objects.create(doctor=doctor, visit_term=visit_term)
+        return redirect('/add_visit/')
 
-            messages.success(request, f"Pomyślnie dodano wizytę dnia {visit_date} "
-                                      f"o godz {TIME[int(visit_time) - 1][1]} "
-                                      f"lekarzowi: {doctor.doctor.first_name} {doctor.doctor.last_name}!")
 
-            return render(request, 'add_visit.html', {'form': form})
-
-        else:
-
-            messages.error(request, "Błąd - nie dodano żadnej wizyty!")
-
-            return render(request, 'add_visit.html', {'form': form})
+# class AddVisitView2(PermissionRequiredMixin, View):
+#     permission_required = 'add_doctorvisit'
+#
+#     doctors = User.objects.filter(doctor__isnull=False)
+#
+#     doc = (
+#         (doctor.id, f"{doctor.first_name} {doctor.last_name}") for doctor in doctors
+#     )
+#
+#     def get(self, request):
+#
+#         form = AddVisitForm()
+#
+#         form.fields['doctor'].choices = self.doc
+#
+#         return render(request, 'add_visit2.html', {'form': form})
+#
+#     def post(self, request):
+#         form = AddVisitForm(request.POST)
+#         form.fields['doctor'].choices = self.doc
+#
+#         if form.is_valid():
+#
+#             doctor, date, time, *rest = [*form.cleaned_data.values()]
+#
+#             visit_term = VisitTerm.objects.create(date=date, time=time)
+#             doctor = Doctor.objects.get(doctor_id=User.objects.get(id=doctor))
+#
+#             DoctorVisit.objects.create(doctor=doctor, visit_term=visit_term)
+#
+#             messages.success(request, f"Pomyślnie dodano wizytę dnia {date} "
+#                                       f"o godz {TIME[int(time) - 1][1]} "
+#                                       f"lekarzowi: {doctor.doctor.first_name} {doctor.doctor.last_name}!")
+#
+#             return render(request, 'add_visit2.html', {'form': form})
+#
+#         else:
+#
+#             messages.error(request, "Błąd - nie dodano żadnej wizyty!")
+#
+#             return render(request, 'add_visit2.html', {'form': form})
 
 
 # class BookVisitView(LoginRequiredMixin, View):
@@ -95,10 +125,10 @@ class AddVisitView(PermissionRequiredMixin, View):
 #             return render(request, 'book_visit.html', {'form': form})
 
 
+# view for booking visits by patients - only for logged-in user
 class BookVisitView2(LoginRequiredMixin, View):
 
     def get(self, request, id_doc, id_pat):
-
         patient = Patient.objects.get(patient=User.objects.get(id=id_pat))
         doctor = Doctor.objects.get(doctor=User.objects.get(id=id_doc))
 
@@ -110,7 +140,6 @@ class BookVisitView2(LoginRequiredMixin, View):
         return render(request, 'book_visit2.html', {'doc_visits': doc_visits, 'patient': patient, 'doctor': doctor})
 
     def post(self, request, id_doc, id_pat):
-
         visit_id = request.POST['term']
 
         visit_term = DoctorVisit.objects.get(id=visit_id)
@@ -127,6 +156,7 @@ class BookVisitView2(LoginRequiredMixin, View):
         return redirect(f"/visits/{id_pat}")
 
 
+# view of all medical visits of logged-in user
 class VisitsView(LoginRequiredMixin, View):
 
     def get(self, request, id):
@@ -137,7 +167,7 @@ class VisitsView(LoginRequiredMixin, View):
         past_visits = []
 
         for med_visit in med_visits:
-            med_visit.visit_term.visit_term.time = TIME[med_visit.visit_term.visit_term.time-1][1]
+            med_visit.visit_term.visit_term.time = TIME[med_visit.visit_term.visit_term.time - 1][1]
             if med_visit.visit_term.visit_term.date >= datetime.date.today():
                 future_visits.append(med_visit)
             else:
