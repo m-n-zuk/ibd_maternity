@@ -80,7 +80,7 @@ class AddVisitView(PermissionRequiredMixin, View):
 #             return render(request, 'add_visit2.html', {'form': form})
 
 
-# class BookVisitView(LoginRequiredMixin, View):
+# class BookVisitView2(LoginRequiredMixin, View):
 #
 #     def get(self, request, id_doc, id_pat):
 #
@@ -126,7 +126,7 @@ class AddVisitView(PermissionRequiredMixin, View):
 
 
 # view for booking visits by patients - only for logged-in user
-class BookVisitView2(LoginRequiredMixin, View):
+class BookVisitView(LoginRequiredMixin, View):
 
     def get(self, request, id_doc, id_pat):
         patient = Patient.objects.get(patient=User.objects.get(id=id_pat))
